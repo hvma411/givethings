@@ -9,17 +9,16 @@ import {
 } from 'react-router-dom';
 // import { Provider } from 'react-redux'
 // import { connect } from 'react-redux'
-
+// import store from './ReduxStore';
 import './scss/main.scss';
 
-// import store from './ReduxStore';
+import Home from './components/Home';
 
 const App = () => {
     return (
-        // <HashRouter>
-        //     <div>abc</div>
-        // </HashRouter>
-        <div>abc</div>
+        <HashRouter>
+            <Home />
+        </HashRouter>
 
     )
 }
