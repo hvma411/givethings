@@ -71,6 +71,7 @@
  
                     li {
                         margin-left: 15px;
+                        cursor: pointer;
 
                         a {
                             text-decoration: none;
@@ -151,7 +152,6 @@
                 
 
             }
-
 
         }
     }
@@ -326,7 +326,7 @@
             color: $color-5;
             text-decoration: none;
             border: 1px solid $color-5;
-            padding: 10px 20px 10px 20px;
+            padding: 15px 20px 15px 20px;
             margin-top: 50px;
             cursor: pointer;
 
@@ -401,5 +401,84 @@
         background-position-x: -60px;
         background-repeat: no-repeat;
         background-size: cover;
+    }
+}
+
+.who__we__help__section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    color: $color-5;
+
+    &--container {
+        width: 100%;
+        max-width: 1640px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2 {
+        font-size: 38px;
+        text-align: center;
+        padding-top: 70px;
+    }
+
+    .decoration {
+        width: 280px;
+        height: 100px;
+        background-image: url(/src/scss/assets/Decoration.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        display: inline-block;
+    }
+
+    .section-items {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        align-items: center;
+        padding-left: 44px;
+
+        .item {
+            padding: 15px 40px 15px 40px;
+            margin: 20px;
+            border: 1px solid $color-5;
+            max-width: 170px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                font-size: 24px;
+                text-align: center;
+                text-decoration: none;
+                color: $color-5;
+
+            }
+        }
+
+        .item:first-child {
+            padding: 27px 40px 27px 40px;
+        }
+    }
+
+    p {
+        font-size: 22px;
+        max-width: 600px;
+        text-align: center;
+        padding-top: 60px;
+        padding-bottom: 60px;
+    }
+
+    .section-organizations {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
 }
