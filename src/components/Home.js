@@ -19,6 +19,7 @@ const Home = () => {
         <>
             <HomeHeader />
             <HomeAboutApp />
+            <HomeAboutUs />
         </>
     )
 }
@@ -75,20 +76,22 @@ const HomeAboutApp = () => {
     return (
         <section className="about__app__section">
             <div className="about__app__section--three-columns">
-                <div className="column">
-                    <h2>10</h2>
-                    <h3>ODDANYCH WORKÓW</h3>
-                    <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
-                </div>
-                <div className="column">
-                    <h2>5</h2>
-                    <h3>WSPARTYCH ORGANIZACJI</h3>
-                    <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
-                </div>
-                <div className="column">
-                    <h2>7</h2>
-                    <h3>ZORGANIZOWANYCH ZBIÓREK</h3>
-                    <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
+                <div className="columns-container">
+                    <div className="column">
+                        <h2>10</h2>
+                        <h3>ODDANYCH WORKÓW</h3>
+                        <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
+                    </div>
+                    <div className="column">
+                        <h2>5</h2>
+                        <h3>WSPARTYCH ORGANIZACJI</h3>
+                        <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
+                    </div>
+                    <div className="column">
+                        <h2>7</h2>
+                        <h3>ZORGANIZOWANYCH ZBIÓREK</h3>
+                        <p>lorem ipsum dolor sit amet, consectetur adipisc. Pellentesque vel enim a elit viverra elementuma. Aliquam erat volutpat</p>
+                    </div>
                 </div>
             </div>
             <div className="about__app__section--title">
@@ -127,6 +130,25 @@ const HomeAboutApp = () => {
                 <Link to="/oddaj-rzeczy">
                     <p>ODDAJ RZECZY</p>
                 </Link>
+            </div>
+        </section>
+    )
+}
+
+const HomeAboutUs = () => {
+
+    return (
+        <section className="about__us__section">
+            <div className="main-container">
+                <div className="about__us__section--left-column columns">
+                    <h3>O nas</h3>
+                    <div className="decoration"></div>
+                    <p>Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip.</p>
+                    <div className="signature--position">
+                        <div className="signature"></div>
+                    </div>
+                </div>
+                <div className="about__us__section--right-column columns"></div>
             </div>
         </section>
     )
