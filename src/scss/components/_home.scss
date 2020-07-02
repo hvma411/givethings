@@ -18,6 +18,7 @@
         height: 100%;
         background-image: url(/src/scss/assets/Home-Hero-Image.jpg);
         background-position: right;
+        background-size: cover;
         background-repeat: no-repeat;
     }
 
@@ -558,5 +559,127 @@
         }
 
 
+    }
+}
+
+.footer__section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: url(/src/scss/assets/Background-Contact-Form.png);
+    background-position: left -40px;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+    .main-container {
+        flex-direction: column;
+        align-items: flex-end;
+
+        .form-box {
+            width: 40%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: $color-5;
+
+            &--title {
+                font-size: 38px;
+                text-align: center;
+            }
+
+            &--decoration {
+                width: 270px;
+                height: 90px;
+                background-image: url(/src/scss/assets/Decoration.svg);
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: contain;
+            }
+
+            .contact-form {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+
+                &--first-row {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    .name-box {
+                        margin-right: 15px;
+                    }
+                }
+
+                label, input {
+                    display: block;
+                    padding-top: 10px;
+                    padding-bottom: 3px;
+                }
+
+                label {
+                    font-size: 14px;
+                    font-weight: 600;
+                    margin-bottom: 2px;
+                }
+
+                input, textarea {
+                    font-size: 16px;
+                    background: none;
+                    border: none;
+                    border-bottom: 1px solid $color-5;
+                    outline: none;
+
+                }
+
+                &--second-row {
+                    width: 100%;
+                    margin-top: 30px;
+
+                    .text-box {
+                        width: 100%;
+                        height: auto;
+
+                        label {
+                            margin-bottom: 10px;
+                        }
+
+                        textarea {
+                            width: 100%;
+                            height: auto;
+                            min-height: 120px;
+                            resize: none;
+                            overflow: hidden;
+                        }
+                    }
+
+
+                }
+
+                button {
+                    outline: none;
+                    font-size: 14px;
+                    font-weight: 100;
+                    background: none;
+                    border: 1px solid $color-5;
+                    max-width: 100px;
+                    padding: 10px 25px 10px 25px;
+                    margin-top: 30px;
+                    
+                }
+            }
+        }
+
+        .footer-info {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
     }
 }

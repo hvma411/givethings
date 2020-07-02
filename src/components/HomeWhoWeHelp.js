@@ -27,6 +27,7 @@ const HomeWhoWeHelp = () => {
                     <li className="item"><NavLink to="/locals">Lokalnym zbiórkom</NavLink></li>
                 </ul>
                 <p className="database-information">W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy. Możesz sprawdzić czym się zajmują, komu pomagają i czego potrzebują.</p>
+                <Route exact path="/" component={FoundationsList} />
                 <Route path="/foundations" component={FoundationsList} />
                 <Route path="/organizations" component={OrganizationsList} />
                 <Route path="/locals" component={LocalsList} />

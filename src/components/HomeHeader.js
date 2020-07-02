@@ -8,7 +8,6 @@ import {
   NavLink,
 } from 'react-router-dom';
 import { Link } from "react-scroll";
-import Home from "./Home";
 // import { Provider } from 'react-redux'
 // import { connect } from 'react-redux'
 // import store from './ReduxStore';
@@ -29,11 +28,11 @@ const HomeHeader = () => {
                             <div className="top__part--nav">
                                 <nav>
                                     <ul>
-                                        <li><Link to="header-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Start</Link></li>
-                                        <li><Link to="about-app-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O co chodzi?</Link></li>
-                                        <li><Link to="about-us-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O nas</Link></li>
-                                        <li><Link to="who-we-help-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Fundacja i organizacje</Link></li>
-                                        <li><Link to="contact-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Kontakt</Link></li>
+                                        <li><NavLink to="/" smooth="true" duration={1000} activeStyle={{ border: "1px solid #3C3C3C" }}>Start</NavLink></li>
+                                        <li><Link to="about-app-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O co chodzi?</Link></li>
+                                        <li><Link to="about-us-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O nas</Link></li>
+                                        <li><Link to="who-we-help-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Fundacja i organizacje</Link></li>
+                                        <li><Link to="footer-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Kontakt</Link></li>
                                     </ul>
                                 </nav>
                             </div>
