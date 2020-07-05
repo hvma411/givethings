@@ -8,11 +8,31 @@ import {
   NavLink,
 } from 'react-router-dom';
 import { Link } from "react-scroll";
-// import { Provider } from 'react-redux'
-// import { connect } from 'react-redux'
-// import store from './ReduxStore';
+import { connect } from 'react-redux'
 
-const HomeHeader = () => {
+
+const HomeHeader = (props) => {
+    console.log(props.isUserLogged)
+
+    const UserBtns = ({isUserLogged}) => {
+        console.log(isUserLogged)
+        if (isUserLogged === true) {
+            return (
+                <div className="top__part--login-register">
+                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
+                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                </div>
+            )
+        } else if (isUserLogged === false) {
+            return (
+                <div className="top__part--login-register">
+                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
+                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                </div>
+            )
+
+        }
+    }
 
     return (
         <header className="header__section" id="header-section">
@@ -21,10 +41,7 @@ const HomeHeader = () => {
                 <div className="header__section--right-column">
                     <div className="top__part">
                         <div className="top__part__container">
-                            <div className="top__part--login-register">
-                                <NavLink to="/login" className="user-btn">Zaloguj</NavLink>
-                                <NavLink to="/register" className="user-btn create-account">Załóż konto</NavLink>
-                            </div>
+                            <UserBtns isUserLogged={props.isUserLogged} />
                             <div className="top__part--nav">
                                 <nav>
                                     <ul>
@@ -58,4 +75,9 @@ const HomeHeader = () => {
     )
 }
 
-export default HomeHeader
+const mapStateToProps = state  => ({
+    isUserLogged: state.isUserLogged,
+    adminPermissions: state.adminPermissions
+})
+
+export default connect(mapStateToProps, {}) (HomeHeader)

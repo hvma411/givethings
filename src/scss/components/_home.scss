@@ -31,6 +31,7 @@
             height: 35%;
             display: flex;
             justify-content: flex-end;
+            z-index: 100;
 
             &__container {
                 width: auto;
@@ -73,8 +74,12 @@
                     li {
                         margin-left: 15px;
                         cursor: pointer;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
 
                         a {
+                            display: inline-table;
                             text-decoration: none;
                             color: $color-5;
                             padding: 5px 15px 5px 15px;
@@ -133,7 +138,9 @@
 
                     li {
                         border: 1px solid $color-5;
-                        padding: 5px 20px 5px 20px;
+                        // padding: 5px 20px 5px 20px;
+                        width: 220px;
+                        height: 100px;
                         max-width: 230px;
                         margin: 50px 20px;
                         text-align: center;
@@ -144,8 +151,8 @@
                         a {
                             text-decoration: none;
                             color: $color-5;
-                            font-size: 36px;
-                            font-weight: lighter;
+                            font-size: 30px;
+                            font-weight: 100;
                             margin: 10px;
                         }
                     }
@@ -328,7 +335,7 @@
             text-decoration: none;
             border: 1px solid $color-5;
             padding: 15px 20px 15px 20px;
-            margin-top: 50px;
+            margin-top: 45px;
             cursor: pointer;
 
             p {
@@ -453,10 +460,14 @@
             justify-content: center;
             align-items: center;
 
-            a {
+            button {
                 font-size: 24px;
                 text-align: center;
                 text-decoration: none;
+                background: none;
+                border: none;
+                outline: none;
+                cursor: pointer;
                 color: $color-5;
 
             }
@@ -568,7 +579,7 @@
     display: flex;
     justify-content: center;
     background-image: url(/src/scss/assets/Background-Contact-Form.png);
-    background-position: left -40px;
+    background-position: right;
     background-repeat: no-repeat;
     background-size: cover;
 
@@ -578,7 +589,8 @@
         align-items: flex-end;
 
         .form-box {
-            width: 40%;
+            width: 660px;
+            padding-right: 100px;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -606,6 +618,24 @@
                 justify-content: center;
                 align-items: flex-end;
 
+                .validation-info {
+                    width: 100%;
+                    height: 30px;
+                    display: flex;
+                    align-items: center;
+
+                    p {
+                        font-size: 12px;
+                        font-weight: 100;
+                        color: red;
+                    }
+
+                    .empty-inputs {
+                        padding: 0;
+                        margin-right: 10px;
+                    }
+                }
+
                 &--first-row {
                     display: flex;
                     justify-content: space-between;
@@ -620,6 +650,7 @@
                     display: block;
                     padding-top: 10px;
                     padding-bottom: 3px;
+                    color: $color-5;
                 }
 
                 label {
@@ -639,7 +670,7 @@
 
                 &--second-row {
                     width: 100%;
-                    margin-top: 30px;
+                    margin-top: 20px;
 
                     .text-box {
                         width: 100%;
@@ -661,6 +692,14 @@
 
                 }
 
+                .submit-box {
+                    display: flex;
+                    width: 100%;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-top: 20px;
+                }
+
                 button {
                     outline: none;
                     font-size: 14px;
@@ -669,7 +708,8 @@
                     border: 1px solid $color-5;
                     max-width: 100px;
                     padding: 10px 25px 10px 25px;
-                    margin-top: 30px;
+                    color: $color-5;
+                    cursor: pointer;
                     
                 }
             }
