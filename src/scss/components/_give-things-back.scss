@@ -1,0 +1,253 @@
+.header__section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+
+    &--left-column, .form-section-background {
+        width: 50%;
+        height: 100%;
+        background-image: url(/src/scss/assets/Form-Hero-Image.png);
+        background-position: right;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    &--right-column, .form-section {
+
+        .bottom__part {
+
+            h3 {
+                font-size: 36px;
+                font-weight: 100;
+                margin: 10px;
+            }
+
+            &--btns {
+                display: flex;
+                justify-content: center;
+
+                .main-box {
+                    position: relative;
+                    display: flex;
+
+                    .rotated-box {
+                        width: 120px;
+                        height: 120px;
+                        margin: 15px;
+                        margin-top: 30px;
+                        border: 1px solid $color-5;
+                        transform: rotate(45deg);
+                    }
+                }
+
+                .text-box {
+                    position: absolute;
+                    display: flex;
+                    justify-content: space-around;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+
+                    .step-box {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+                        margin: 10px;
+
+                        h3 {
+                            font-size: 30px;
+                            text-align: center;
+                        }
+
+                        span {
+                            font-size: 20px;
+                            font-weight: 100;
+                            text-align: center;
+                            max-width: 90px;
+                            margin-top: 10px;
+                            margin-bottom: 35px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.give__things__back__section {
+    width: 100%;
+    height: 100vh;
+
+    .important__info {
+        width: 100%;
+        height: 20%;
+        background: $color-3;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .info-box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            width: 90%;
+
+            h3 {
+                font-size: 34px;
+                color: #000000;
+                font-weight: 600;
+                text-align: left;
+                margin: 5px;
+            }
+
+            p {
+                font-size: 20px;
+                color: $color-5;
+                text-align: left;
+                margin: 5px;
+            }
+        }
+    }
+
+    .form__part {
+        width: 100%;
+        height: 80%;
+        background: url(/src/scss/assets/Background-Form.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &--container {
+            width: 90%;
+            height: 100%;
+
+            .steps-box {
+                height: 100%;
+
+                .counter {
+                    display: inline-block;
+                    font-size: 22px;
+                    font-weight: 100;
+                    text-align: left;
+                    margin-top: 30px;
+                    margin-bottom: 60px;
+                    color: $color-5
+                }
+                
+                .step-title {
+                    font-size: 34px;
+                    font-weight: 600;
+                    text-align: left;
+                    margin-bottom: 50px;
+                }
+
+                .input-box {
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    color: $color-5
+
+                    p {
+                        font-size: 22px;
+                        font-weight: 100;
+                        text-align: left;
+                        margin-right: 10px;
+                    }
+
+                    label {
+                        font-size: 22px;
+                        font-weight: 100;
+                        text-align: left;
+                    }
+
+                    .checkbox input {
+                        display: none;
+                        z-index: -9999;
+                    }
+
+                    .checkbox span {
+                        width: 30px;
+                        height: 30px;
+                        display: block;
+                        border: 1px solid $color-5;
+                        margin-right: 30px;
+                    }
+
+                    .checkbox input:checked + span {
+                        background-color: $color-3;
+                    }
+
+                    .select {
+                        width: 200px;
+                        height: 35px;
+                        padding: 5px;
+                        padding-left: 10px;
+                        border: 1px solid $color-5;
+                        font-size: 22px;
+                        font-weight: 100;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        cursor: pointer;
+
+                        .arrow {
+                            width: 15px;
+                            height: 15px;
+                            border-bottom: 3px solid $color-5;
+                            border-left: 3px solid $color-5;
+                            border-radius: 2px;
+                            transform: rotate(-45deg);
+                            margin: 5px 10px 10px 10px;
+                        }
+
+                        .select-opened {
+                            transform: rotate(135deg);
+                            margin: 10px 10px 5px 5px;
+                        }
+                    }
+                }
+
+                .list-box {
+                    padding-left: 300px;
+
+                    ul {
+                        width: 60px;
+                        height: auto;
+                        border: 1px solid $color-5;
+                        font-size: 22px;
+                        font-weight: 100;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-items: center;
+
+                        li {
+                            width: 100%;
+                            margin: 5px;
+                            text-align: center;
+                        }
+                    }
+                }
+
+                button {
+                    font-size: 22px;
+                    font-weight: 100;
+                    background: none;
+                    border: 1px solid $color-5;
+                    padding: 20px 40px 20px 40px;
+                    margin-top: 80px;
+                    outline: none;
+                    cursor: pointer;
+                    color: $color-5
+                }
+            }
+        }
+    }
+}

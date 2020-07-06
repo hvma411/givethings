@@ -10,9 +10,7 @@ import {
 import { Link } from "react-scroll";
 import { register } from "react-scroll/modules/mixins/scroller";
 import { fire } from "../firebase-config/firebase";
-// import { Provider } from 'react-redux'
-// import { connect } from 'react-redux'
-// import store from './ReduxStore';
+import store from './redux/store';
 
 const Register = () => {
 
@@ -48,7 +46,16 @@ const Register = () => {
             const errorMessage = err.message;
             console.log(errorCode);
             console.log(errorMessage);
-        });
+        }).then( () => {
+            fire.auth().onAuthStateChanged((user) => {
+                if (user) {
+                    store.dispatch({ type: 'USER_LOGGED' })
+                    store.dispatch({ type: 'USER_EMAIL', email: registerForm.email })
+                    window.location = '/'
+
+                }
+            })
+        })
     }
 
     const validateRegister = () => {

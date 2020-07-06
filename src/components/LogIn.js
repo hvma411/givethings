@@ -24,13 +24,6 @@ const LogIn = (props) => {
         display: "none"
     })
 
-    const [firebaseErrors, setFirebaseErrors] = useState({
-        err: ""
-    })
-
-    const [userInfo, setUserInfo] = useState({
-        userEmail: ""
-    })
 
     const handleFormChange = (e) => {
         e.persist();
@@ -44,20 +37,22 @@ const LogIn = (props) => {
         fire.auth().signInWithEmailAndPassword(logInForm.email, logInForm.password).catch(err => {
             const errorCode = err.code;
             const errorMessage = err.message;
-            if (errorCode.length > 0) {
-                console.log(errorCode)
+            if (errorCode === 'auth/user-not-found' || errorCode === 'auth/wrong-password' || errorCode === 'auth/invalid-email') {
+
                 setValidateInfo({
                     display: "block"
                 })
-            } else if (errorCode.length === 0) {
+            } else {
                 console.log(errorCode)
                 setValidateInfo({
                     display: "none"
                 })
             }
-        }).then(() => {
+        }).then( () => {
             fire.auth().onAuthStateChanged((user) => {
                 if (user) {
+                    store.dispatch({ type: 'USER_LOGGED' })
+                    store.dispatch({ type: 'USER_EMAIL', email: logInForm.email })
                     window.location = '/'
                 }
             })
@@ -67,9 +62,6 @@ const LogIn = (props) => {
     const handleSubmitLogIn = (e) => {
         e.preventDefault();
         logInUser();
-        store.dispatch({ type: 'USER_LOGGED' })
-        console.log(props);
-        console.log(logInForm);
     }
 
 

@@ -26,7 +26,8 @@ const loadFromLocalStorage = () => {
 
 const userState = {
     isUserLogged: false,
-    adminPermissions: false, 
+    adminPermissions: false,
+    userEmail: '' 
 }
 
 const userUpdate = (state = userState, action) => {
@@ -43,10 +44,18 @@ const userUpdate = (state = userState, action) => {
             return {
                 ...state, adminPermissions: true
             }
+        case 'USER_EMAIL':
+            return {
+                ...state, userEmail: action.email
+            }
         default:
             return state
     }
 }
+
+const userEmail = item => ({type: 'USER_EMAIL', item})
+
+
 
 const persistedState = loadFromLocalStorage();
 

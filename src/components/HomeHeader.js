@@ -6,21 +6,35 @@ import {
 //   Link,
   Switch,
   NavLink,
+  Redirect,
 } from 'react-router-dom';
 import { Link } from "react-scroll";
 import { connect } from 'react-redux'
+import { fire } from "../firebase-config/firebase";
+import store from './redux/store'
 
 
 const HomeHeader = (props) => {
     console.log(props.isUserLogged)
+
+    const handleLogOut = (e) => {
+        fire.auth().signOut().then(() => {
+            store.dispatch({ type: 'USER_LOGGED_OUT' })
+            store.dispatch({ type: 'USER_EMAIL', email: "" })
+            // return <Route exact path="/" render={() => (<Redirect to="/items" />)} />
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
 
     const UserBtns = ({isUserLogged}) => {
         console.log(isUserLogged)
         if (isUserLogged === true) {
             return (
                 <div className="top__part--login-register">
-                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
-                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                    <div className="hello-user">Cześć, {props.userEmail}</div>
+                    <NavLink to="/oddaj-rzeczy" className="user-btn create-account">Oddaj rzeczy</NavLink>
+                    <NavLink to="/wylogowano" onClick={handleLogOut} className="user-btn">Wyloguj</NavLink>
                 </div>
             )
         } else if (isUserLogged === false) {
@@ -77,7 +91,8 @@ const HomeHeader = (props) => {
 
 const mapStateToProps = state  => ({
     isUserLogged: state.isUserLogged,
-    adminPermissions: state.adminPermissions
+    adminPermissions: state.adminPermissions,
+    userEmail: state.userEmail
 })
 
 export default connect(mapStateToProps, {}) (HomeHeader)

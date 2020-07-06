@@ -16,16 +16,18 @@ import Home from './components/Home';
 import LogIn from './components/LogIn';
 import Register from './components/Register';
 import LoggedOut from './components/LoggedOut';
+import GiveThingsBack from './components/GiveThingsBack';
 
 
 const App = () => {
     return (
         <HashRouter>
             <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/logowanie" component={LogIn} />
-                <Route path="/rejestracja" component={Register} />
-                <Route path="/wylogowano" component={LoggedOut} />
+                <Route exact path="/" component={ Home } />
+                <Route path="/logowanie" component={ LogIn } />
+                <Route path="/rejestracja" component={ Register } />
+                <Route path="/wylogowano" component={ LoggedOut } />
+                <Route path="/oddaj-rzeczy" component={ GiveThingsBack } />
             </Switch>
         </HashRouter>
 

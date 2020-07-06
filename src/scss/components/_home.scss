@@ -44,13 +44,21 @@
 
 
             &--login-register {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .hello-user {
+                    font-size: 12px;
+                    color: $color-5;
+                }
 
                 .user-btn {
                     background: none;
                     border: none;
                     font-size: 13px;
                     color: $color-4;
-                    padding: 5px 10px 5px 10px;
+                    padding: 7px 10px 7px 10px;
                     cursor: pointer;
                     outline: none;
                     text-decoration: none;
@@ -123,6 +131,7 @@
             &--img {
                 width: 50%;
                 height: 60px;
+                margin: 10px;
                 content: '';
                 background-image: url(/src/scss/assets/Decoration.svg);
                 background-repeat: no-repeat;
