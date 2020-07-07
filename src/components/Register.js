@@ -23,7 +23,8 @@ const Register = () => {
     const [validateInfo, setValidateInfo] = useState({
         emailInfo: "none",
         passwordInfo: "none",
-        password2Info: "none"
+        password2Info: "none",
+        accountExist: "none"
     })
 
     const handleFormChange = (e) => {
@@ -45,6 +46,17 @@ const Register = () => {
             const errorCode = err.code;
             const errorMessage = err.message;
             console.log(errorCode);
+            if (errorCode === "auth/email-already-in-use") {
+                setValidateInfo(prevState => ({
+                    ...prevState,
+                    accountExist: "block"
+                }))
+            } else {
+                setValidateInfo(prevState => ({
+                    ...prevState,
+                    accountExist: "none"
+                }))
+            }
             console.log(errorMessage);
         }).then( () => {
             fire.auth().onAuthStateChanged((user) => {
@@ -134,6 +146,7 @@ const Register = () => {
                         <input type="text" name="email" id="email" onChange={ handleFormChange } value={ registerForm.email } />
                         <div className="validate-info">
                             <p style={{ display: `${ validateInfo.emailInfo }`}}>Wpisz poprawny email</p>
+                            <p style={{ display: `${ validateInfo.accountExist }`}}>Ten email jest już w naszej bazie</p>
                         </div>
                     </div>
                     <div className="log-in-form--second-box">

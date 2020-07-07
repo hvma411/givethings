@@ -110,14 +110,47 @@ const GiveThingsBack = (props) => {
 
 const GiveThingsBackForm = () => {
     const [formData, setFormData] = useState({
-        formStep: 1,
+        formStep: 5,
         clothes: false,
         garbageClothes: false,
         toys: false,
         books: false,
         other: false,
-        bagsValue: 0
+        bagValue: 0,
+        location: "",
+        organizationName: "",
+        street: "",
+        city: "",
+        postCode: "",
+        phoneNumber: "",
+        date: "",
+        hour: "",
+        notes: ""
     })
+
+    const BagsValue = () => {
+        if (formData.bagValue === 0) {
+            return (
+                <span>-- wybierz --</span>
+            )
+        } else {
+            return (
+                <span>{formData.bagValue}</span>
+            )
+        }
+    }
+
+    const LocationValue = () => {
+        if (formData.location === "") {
+            return (
+                <span>-- wybierz --</span>
+            )
+        } else {
+            return (
+                <span>{formData.location}</span>
+            )
+        }
+    }
 
     const handleInputChange = (e) => {
         e.persist();
@@ -125,6 +158,49 @@ const GiveThingsBackForm = () => {
             ...prevState,
             [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value
         }))
+    }
+
+    const handleOrganizationChange = (e) => {
+        e.persist();
+        setFormData(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value,
+        }))
+    }
+
+    const handleAddressAndDateChange = (e) => {
+        e.persist();
+        setFormData(prevState => ({
+            ...prevState,
+            [e.target.name]: e.target.value
+            
+        }))
+    }
+
+    const handleBagsSelect = (e) => {
+        e.persist();
+        const arrow = document.querySelector('.arrow');
+        const list = document.querySelector('.second-row > ul');
+        setFormData(prevState => ({
+            ...prevState,
+            bagValue: e.target.value
+        }))
+        console.log(formData)
+        arrow.classList.remove('select-opened');
+        list.classList.remove('visible')
+    }
+
+    const handleLocationSelect = (e) => {
+        e.persist();
+        const arrow = document.querySelector('.arrow');
+        const list = document.querySelector('.second-row > ul');
+        setFormData(prevState => ({
+            ...prevState,
+            location: e.target.dataset.id
+        }))
+        console.log(formData)
+        arrow.classList.remove('select-opened');
+        list.classList.remove('visible')
     }
 
     const handleNextStepClick = (e) => {
@@ -136,14 +212,61 @@ const GiveThingsBackForm = () => {
         console.log(formData)
     }
 
+    const handlePrevStepClick = (e) => {
+        e.preventDefault();
+        setFormData(prevState => ({
+            ...prevState,
+            formStep: formData.formStep - 1
+        }))
+        console.log(formData)
+    }
+
     const handleSelectClick = (e) => {
         const arrow = document.querySelector('.arrow');
+        const list = document.querySelector('.second-row > ul');
         if (arrow.classList.contains('select-opened')) {
             arrow.classList.remove('select-opened');
+            list.classList.remove('visible')
+
         } else {
             arrow.classList.add('select-opened')
+            list.classList.add('visible')
         }
         
+    }
+
+    const [selectedOption, setSelectedOption] = useState({
+        option1: "none",
+        option2: "none",
+        option3: "none",
+        option4: "none",
+        option5: "none"
+    })
+
+    const handleOptionClick = (e) => {
+        e.persist();
+        if (e.target.style.background === "rgb(250, 214, 72)") {
+            setSelectedOption(prevState => ({
+                ...prevState,
+                [e.target.dataset.name]: "none"
+            }))
+            setFormData(prevState => ({
+                ...prevState,
+                [e.target.dataset.name]: false
+            }))
+            console.log(formData)
+        } else if (e.target.style.background === "none") {
+            setSelectedOption(prevState => ({
+                ...prevState,
+                [e.target.dataset.name]: "#FAD648"
+            }))
+            setFormData(prevState => ({
+                ...prevState,
+                [e.target.dataset.name]: true
+            }))
+            console.log(formData)
+        }
+
     }
 
     if (formData.formStep === 1) {
@@ -152,69 +275,190 @@ const GiveThingsBackForm = () => {
                 <span className="counter">Krok {formData.formStep}/4</span>
                 <h3 className="step-title">Zaznacz co chcesz oddać</h3>
                 <form>
-                    <div className="input-box">
-                        <label className="checkbox">
-                            <input type="checkbox" id="option-1" name="clothes" checked={ formData.clothes } onChange={ handleInputChange } />
-                            <span></span>
-                        </label>
-                        <label htmlFor="option-1">ubrania, które nadają się do ponownego użycia</label>
-                    </div>
-                    <div className="input-box">
-                        <label className="checkbox">
-                            <input type="checkbox" id="option-2" name="garbageClothes" checked={ formData.garbageClothes } onChange={ handleInputChange } />
-                            <span></span>
-                        </label>
-                        <label htmlFor="option-2">ubrania, do wyrzucenia</label>
-                    </div>
-                    <div className="input-box">
-                        <label className="checkbox">
-                            <input type="checkbox" id="option-3" name="toys" checked={ formData.toys } onChange={ handleInputChange } />
-                            <span></span>
-                        </label>
-                        <label htmlFor="option-3">zabawki</label>
-                    </div>
-                    <div className="input-box">
-                        <label className="checkbox">
-                            <input type="checkbox" id="option-4" name="books" checked={ formData.books } onChange={ handleInputChange }  />
-                            <span></span>
-                        </label>
-                        <label htmlFor="option-4">książki</label>
-                    </div>
-                    <div className="input-box">
-                        <label className="checkbox">
-                            <input type="checkbox" id="option-5" name="other" checked={ formData.other } onChange={ handleInputChange }  />
-                            <span></span>
-                        </label>
-                        <label htmlFor="option-5">inne</label>
+                    <div className="all-inputs">
+                        <div className="input-box">
+                            <label className="checkbox">
+                                <input type="checkbox" id="option-1" name="clothes" checked={ formData.clothes } onChange={ handleInputChange } />
+                                <span></span>
+                            </label>
+                            <label htmlFor="option-1">ubrania, które nadają się do ponownego użycia</label>
+                        </div>
+                        <div className="input-box">
+                            <label className="checkbox">
+                                <input type="checkbox" id="option-2" name="garbageClothes" checked={ formData.garbageClothes } onChange={ handleInputChange } />
+                                <span></span>
+                            </label>
+                            <label htmlFor="option-2">ubrania, do wyrzucenia</label>
+                        </div>
+                        <div className="input-box">
+                            <label className="checkbox">
+                                <input type="checkbox" id="option-3" name="toys" checked={ formData.toys } onChange={ handleInputChange } />
+                                <span></span>
+                            </label>
+                            <label htmlFor="option-3">zabawki</label>
+                        </div>
+                        <div className="input-box">
+                            <label className="checkbox">
+                                <input type="checkbox" id="option-4" name="books" checked={ formData.books } onChange={ handleInputChange }  />
+                                <span></span>
+                            </label>
+                            <label htmlFor="option-4">książki</label>
+                        </div>
+                        <div className="input-box">
+                            <label className="checkbox">
+                                <input type="checkbox" id="option-5" name="other" checked={ formData.other } onChange={ handleInputChange }  />
+                                <span></span>
+                            </label>
+                            <label htmlFor="option-5">inne</label>
+                        </div>
                     </div>
                     <button onClick={handleNextStepClick}>Dalej</button>
                 </form>
             </div>
         )
-    } else if (formData.formStep > 1) {
+    } else if (formData.formStep === 2) {
 
         return (
             <div className="steps-box">
             <span className="counter">Krok {formData.formStep}/4</span>
             <h3 className="step-title">Podaj liczbę 60l worków, w które spakowałeś/aś rzeczy:</h3>
             <form>
-                <div className="input-box">
-                    <p>Liczba 60l worków:</p>
-                    <div className="select" onClick={handleSelectClick}>
-                        <span>-- wybierz --</span>
-                        <span className="arrow"></span>
+                <div className="all-inputs">
+                    <div className="input-box step-2">
+                        <div className="first-row">
+                            <p>Liczba 60l worków:</p>
+                            <div className="select" onClick={handleSelectClick}>
+                                <BagsValue />
+                                <span className="arrow"></span>
+                            </div>
+                        </div>
+                        <div className="second-row">
+                            <ul className="bags-list">
+                                <li name="bagValue" onClick={handleBagsSelect} value={1}>1</li>
+                                <li name="bagValue" onClick={handleBagsSelect} value={2}>2</li>
+                                <li name="bagValue" onClick={handleBagsSelect} value={3}>3</li>
+                                <li name="bagValue" onClick={handleBagsSelect} value={4}>4</li>
+                                <li name="bagValue" onClick={handleBagsSelect} value={5}>5</li>
+                            </ul>   
+                        </div>
                     </div>
                 </div>
-                <div className="list-box">
-                    <ul>
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                    </ul>       
-                </div>
+                <button onClick={handlePrevStepClick}>Wstecz</button>
                 <button onClick={handleNextStepClick}>Dalej</button>
             </form>
-        </div>
+            </div>
+        )
+    } else if (formData.formStep === 3) {
+
+        return (
+            <div className="steps-box">
+            <span className="counter">Krok {formData.formStep}/4</span>
+            <h3 className="step-title">Lokalizacja:</h3>
+            <form>
+                <div className="all-inputs">
+                    <div className="input-box step-2">
+                        <div className="first-row">
+                            <div className="select" onClick={handleSelectClick}>
+                                <LocationValue />
+                                <span className="arrow"></span>
+                            </div>
+                        </div>
+                        <div className="second-row location-list">
+                            <ul>
+                                <li name="location" onClick={ handleLocationSelect } data-id="Poznań">Poznań</li>
+                                <li name="location" onClick={ handleLocationSelect } data-id="Warszawa">Warszawa</li>
+                                <li name="location" onClick={ handleLocationSelect } data-id="Kraków">Kraków</li>
+                                <li name="location" onClick={ handleLocationSelect } data-id="Wrocław">Wrocław</li>
+                                <li name="location" onClick={ handleLocationSelect } data-id="Katowice">Katowice</li>
+                            </ul>   
+                        </div>
+                        <div className="third-row">
+                            <h3>Komu chcesz pomóc?</h3>
+                            <div className="select-options">
+                                <div className="option" data-name="option1" data-val="dzieci" onClick={ handleOptionClick } style={{ background: `${selectedOption.option1}` }}>dzieciom</div>
+                                <div className="option" data-name="option2" data-val="samotne matki" onClick={ handleOptionClick } style={{ background: `${selectedOption.option2}` }}>samotnym matkom</div>
+                                <div className="option" data-name="option3" data-val="bezdomni" onClick={ handleOptionClick } style={{ background: `${selectedOption.option3}` }}>bezdomnym</div>
+                                <div className="option" data-name="option4" data-val="niepełnosprawni" onClick={ handleOptionClick } style={{ background: `${selectedOption.option4}` }}>niepełnosprawnym</div>
+                                <div className="option" data-name="option5" data-val="osoby starsze" onClick={ handleOptionClick } style={{ background: `${selectedOption.option5}` }}>osobom starszym</div>
+                            </div>
+                        </div>
+                        <div className="fourth-row">
+                            <h3>Wpisz nazwę konkretnej organizacji (opcjonalnie)</h3>
+                            <input type="text" name="organizationName" value={ formData.organizationName } onChange={ handleOrganizationChange }></input>
+                        </div>
+                    </div>
+                </div>
+                <button onClick={ handlePrevStepClick }>Wstecz</button>
+                <button onClick={ handleNextStepClick }>Dalej</button>
+            </form>
+            </div>
+        )
+    } else if (formData.formStep === 4) {
+        return (
+            <div className="steps-box">
+            <span className="counter">Krok {formData.formStep}/4</span>
+            <h3 className="step-title">Podaj adres oraz termin odbioru rzeczy przez kuriera</h3>
+            <form>
+                <div className="address__date__form">
+                    <div className="address-box">
+                        <h4>Adres odbioru:</h4>
+                        <div className="address-box--row">
+                            <label htmlFor="street">Ulica:</label>
+                            <input type="text" id="street" name="street" onChange={ handleAddressAndDateChange } value={ formData.street } />
+                        </div>
+                        <div className="address-box--row">
+                            <label htmlFor="city">Miasto:</label>
+                            <input type="text" id="city" name="city" onChange={ handleAddressAndDateChange } value={ formData.city } />
+                        </div>
+                        <div className="address-box--row">
+                            <label htmlFor="postCode">Kod pocztowy:</label>
+                            <input type="text" id="postCode" name="postCode" onChange={ handleAddressAndDateChange } value={ formData.postCode } />
+                        </div>
+                        <div className="address-box--row">
+                            <label htmlFor="phoneNumber">Numer telefonu:</label>
+                            <input type="text" id="phoneNumber" name="phoneNumber" onChange={ handleAddressAndDateChange } value={ formData.phoneNumber } />
+                        </div>
+                    </div>
+                    <div className="date-box">
+                        <h4>Termin odbioru:</h4>
+                        <div className="date-box--row">
+                            <label htmlFor="date">Data:</label>
+                            <input type="date" id="date" name="date" onChange={ handleAddressAndDateChange } value={ formData.date } />
+                        </div>
+                        <div className="date-box--row">
+                            <label htmlFor="hour">Godzina:</label>
+                            <input type="text" id="hour" name="hour" onChange={ handleAddressAndDateChange } value={ formData.hour } />
+                        </div>
+                        <div className="address-box--row">
+                            <label htmlFor="notes">Uwagi dla kuriera:</label>
+                            <textarea id="notes" name="notes" onChange={ handleAddressAndDateChange } value={ formData.notes } />
+                        </div>
+                    </div>
+                </div>
+                <button onClick={ handlePrevStepClick }>Wstecz</button>
+                <button onClick={ handleNextStepClick }>Dalej</button>
+            </form>
+            </div>
+        )
+    } else if (formData.formStep === 5) {
+        return (
+            <div className="steps-box">
+                <h3 className="step-title summary">Podsumowanie Twojej darowizny</h3>
+                <div className="summary--first-row">
+                    <h4>Oddajesz:</h4>
+                    <div className="items">
+                        <span></span>
+                        <p>{formData.bagValue} worki, </p>
+                    </div>
+                    <div className="location">
+                        <span></span>
+                        <p>dla lokalizacji: {formData.location} </p>
+                    </div>
+                </div>
+                <div className="summary--second-row"></div>
+                <button onClick={ handlePrevStepClick }>Wstecz</button>
+                <button onClick={ handleNextStepClick }>Dalej</button>
+            </div>
         )
     }
 }
