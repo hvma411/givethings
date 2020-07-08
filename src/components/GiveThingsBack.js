@@ -111,6 +111,8 @@ const GiveThingsBack = (props) => {
 const GiveThingsBackForm = () => {
     const [formData, setFormData] = useState({
         formStep: 5,
+        names: [],
+        giveItTo: [],
         clothes: false,
         garbageClothes: false,
         toys: false,
@@ -158,6 +160,19 @@ const GiveThingsBackForm = () => {
             ...prevState,
             [e.target.name]: e.target.type === "checkbox" ? e.target.checked : e.target.value
         }))
+
+        if (e.target.checked === true) {
+            setFormData(prevState => ({
+                ...prevState,
+                names: [...prevState.names, e.target.dataset.name]
+            }))
+        } else if (e.target.checked === false) {
+            let filteredArr = formData.names.filter(item => item !== e.target.dataset.name);
+            setFormData(prevState => ({
+                ...prevState,
+                names: filteredArr
+            }))
+        }
     }
 
     const handleOrganizationChange = (e) => {
@@ -254,7 +269,6 @@ const GiveThingsBackForm = () => {
                 ...prevState,
                 [e.target.dataset.name]: false
             }))
-            console.log(formData)
         } else if (e.target.style.background === "none") {
             setSelectedOption(prevState => ({
                 ...prevState,
@@ -264,7 +278,21 @@ const GiveThingsBackForm = () => {
                 ...prevState,
                 [e.target.dataset.name]: true
             }))
-            console.log(formData)
+        }
+
+        if (e.target.style.background === "none") {
+            setFormData(prevState => ({
+                ...prevState,
+                giveItTo: [...prevState.giveItTo, e.target.dataset.val]
+            }))
+            console.log(formData.giveItTo)
+        } else if (e.target.style.background === "rgb(250, 214, 72)") {
+            let filteredArr = formData.giveItTo.filter(item => item !== e.target.dataset.val);
+            setFormData(prevState => ({
+                ...prevState,
+                giveItTo: filteredArr
+            }))
+            console.log(formData.giveItTo)
         }
 
     }
@@ -278,35 +306,35 @@ const GiveThingsBackForm = () => {
                     <div className="all-inputs">
                         <div className="input-box">
                             <label className="checkbox">
-                                <input type="checkbox" id="option-1" name="clothes" checked={ formData.clothes } onChange={ handleInputChange } />
+                                <input type="checkbox" id="option-1" name="clothes" data-name="ubrania w dobrym stanie" checked={ formData.clothes } onChange={ handleInputChange } />
                                 <span></span>
                             </label>
                             <label htmlFor="option-1">ubrania, które nadają się do ponownego użycia</label>
                         </div>
                         <div className="input-box">
                             <label className="checkbox">
-                                <input type="checkbox" id="option-2" name="garbageClothes" checked={ formData.garbageClothes } onChange={ handleInputChange } />
+                                <input type="checkbox" id="option-2" name="garbageClothes" data-name="zniszczone ubrania" checked={ formData.garbageClothes } onChange={ handleInputChange } />
                                 <span></span>
                             </label>
                             <label htmlFor="option-2">ubrania, do wyrzucenia</label>
                         </div>
                         <div className="input-box">
                             <label className="checkbox">
-                                <input type="checkbox" id="option-3" name="toys" checked={ formData.toys } onChange={ handleInputChange } />
+                                <input type="checkbox" id="option-3" name="toys" data-name="zabawki" checked={ formData.toys } onChange={ handleInputChange } />
                                 <span></span>
                             </label>
                             <label htmlFor="option-3">zabawki</label>
                         </div>
                         <div className="input-box">
                             <label className="checkbox">
-                                <input type="checkbox" id="option-4" name="books" checked={ formData.books } onChange={ handleInputChange }  />
+                                <input type="checkbox" id="option-4" name="books" data-name="książki" checked={ formData.books } onChange={ handleInputChange }  />
                                 <span></span>
                             </label>
                             <label htmlFor="option-4">książki</label>
                         </div>
                         <div className="input-box">
                             <label className="checkbox">
-                                <input type="checkbox" id="option-5" name="other" checked={ formData.other } onChange={ handleInputChange }  />
+                                <input type="checkbox" id="option-5" name="other" data-name="inne" checked={ formData.other } onChange={ handleInputChange }  />
                                 <span></span>
                             </label>
                             <label htmlFor="option-5">inne</label>
@@ -375,11 +403,11 @@ const GiveThingsBackForm = () => {
                         <div className="third-row">
                             <h3>Komu chcesz pomóc?</h3>
                             <div className="select-options">
-                                <div className="option" data-name="option1" data-val="dzieci" onClick={ handleOptionClick } style={{ background: `${selectedOption.option1}` }}>dzieciom</div>
-                                <div className="option" data-name="option2" data-val="samotne matki" onClick={ handleOptionClick } style={{ background: `${selectedOption.option2}` }}>samotnym matkom</div>
-                                <div className="option" data-name="option3" data-val="bezdomni" onClick={ handleOptionClick } style={{ background: `${selectedOption.option3}` }}>bezdomnym</div>
-                                <div className="option" data-name="option4" data-val="niepełnosprawni" onClick={ handleOptionClick } style={{ background: `${selectedOption.option4}` }}>niepełnosprawnym</div>
-                                <div className="option" data-name="option5" data-val="osoby starsze" onClick={ handleOptionClick } style={{ background: `${selectedOption.option5}` }}>osobom starszym</div>
+                                <div className="option" data-name="option1" data-val="dzieciom" onClick={ handleOptionClick } style={{ background: `${selectedOption.option1}` }}>dzieciom</div>
+                                <div className="option" data-name="option2" data-val="samotnym matkom" onClick={ handleOptionClick } style={{ background: `${selectedOption.option2}` }}>samotnym matkom</div>
+                                <div className="option" data-name="option3" data-val="bezdomnym" onClick={ handleOptionClick } style={{ background: `${selectedOption.option3}` }}>bezdomnym</div>
+                                <div className="option" data-name="option4" data-val="niepełnosprawnym" onClick={ handleOptionClick } style={{ background: `${selectedOption.option4}` }}>niepełnosprawnym</div>
+                                <div className="option" data-name="option5" data-val="osobom starszym" onClick={ handleOptionClick } style={{ background: `${selectedOption.option5}` }}>osobom starszym</div>
                             </div>
                         </div>
                         <div className="fourth-row">
@@ -441,18 +469,57 @@ const GiveThingsBackForm = () => {
             </div>
         )
     } else if (formData.formStep === 5) {
+
         return (
             <div className="steps-box">
                 <h3 className="step-title summary">Podsumowanie Twojej darowizny</h3>
                 <div className="summary--first-row">
-                    <h4>Oddajesz:</h4>
-                    <div className="items">
-                        <span></span>
-                        <p>{formData.bagValue} worki, </p>
-                    </div>
-                    <div className="location">
-                        <span></span>
-                        <p>dla lokalizacji: {formData.location} </p>
+                    <h3>Oddajesz:</h3>
+                    <div className="summary-box">
+                        <div className="items">
+                            <span></span>
+                            <p>{formData.bagValue} worki, { formData.names.join(", ") } i chcesz przekazać rzeczy { formData.giveItTo.join(", ") } </p>
+                        </div>
+                        <div className="location">
+                            <span></span>
+                            <p>dla lokalizacji: {formData.location} </p>
+                        </div>
+                        <div className="address-date">
+                            <div className="address">
+                                <h3>Adres odbioru:</h3>
+                                <div>
+                                    <span>Ulica:</span>
+                                    <p>{ formData.street }</p>
+                                </div>
+                                <div>
+                                    <span>Miasto:</span>
+                                    <p>{ formData.city }</p>
+                                </div>
+                                <div>
+                                    <span>Kod pocztowy:</span>
+                                    <p>{ formData.postCode }</p>
+                                </div>
+                                <div>
+                                    <span>Numer telefonu:</span>
+                                    <p>{ formData.phoneNumber }</p>
+                                </div>
+                            </div>
+                            <div className="date">
+                                <h3>Termin odbioru:</h3>
+                                <div>
+                                    <span>Data:</span>
+                                    <p>{ formData.date }</p>
+                                </div>
+                                <div>
+                                    <span>Godzina:</span>
+                                    <p>{ formData.hour }</p>
+                                </div>
+                                <div>
+                                    <span>Uwagi dla kuriera:</span>
+                                    <p>{formData.notes}</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="summary--second-row"></div>

@@ -419,13 +419,19 @@
             .summary {
                 margin-top: 50px;
 
+
                 &--first-row {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
                     align-items: flex-start;
 
-                    h4 {
+
+                    .summary-box {
+                        height: 400px;
+                    }
+
+                    h3 {
                         font-size: 22px;
                         font-weight: 400;
                         margin-bottom: 20px;
@@ -434,7 +440,6 @@
 
                     .items, .location {
                         display: flex;
-                        justify-content: space-between;
                         align-items: center;
                         margin-bottom: 10px;
 
@@ -442,7 +447,45 @@
                             font-size: 22px;
                             text-align: left;
                             font-weight: 100;
+                            max-width: 900px;
 
+                        }
+                    }
+
+                    .address-date {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .address {
+                            margin-right: 200px;
+                        }
+
+                        .address, .date {
+
+                            h3 {
+                                margin-top: 40px;
+                            }
+
+                            div {
+                                display: flex;
+
+                                p, span{
+                                    font-size: 22px;
+                                    font-weight: 100;
+                                    text-align: left; 
+                                    margin-bottom: 20px;
+                                 }
+
+                                 p {
+                                     overflow-wrap: break-word;
+                                     max-width: 350px;
+                                 }
+
+                                 span {
+                                     margin-right: 10px;
+                                     width: 120px;
+                                 }
+                            }
                         }
                     }
 
