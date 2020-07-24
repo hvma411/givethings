@@ -25,6 +25,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	overflow-x: hidden;
+}
+html {
+	overflow-x: hidden;
 }
 ol, ul {
 	list-style: none;
@@ -46,5 +50,6 @@ table {
 
 body {
 	font-family: $font-base;
+	user-select: none;
 	
 }
