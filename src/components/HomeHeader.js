@@ -6,13 +6,47 @@ import {
 //   Link,
   Switch,
   NavLink,
+  Redirect,
 } from 'react-router-dom';
 import { Link } from "react-scroll";
-// import { Provider } from 'react-redux'
-// import { connect } from 'react-redux'
-// import store from './ReduxStore';
+import { connect } from 'react-redux'
+import { fire } from "../firebase-config/firebase";
+import store from './redux/store'
 
-const HomeHeader = () => {
+
+const HomeHeader = (props) => {
+    console.log(props.isUserLogged)
+
+    const handleLogOut = (e) => {
+        fire.auth().signOut().then(() => {
+            store.dispatch({ type: 'USER_LOGGED_OUT' })
+            store.dispatch({ type: 'USER_EMAIL', email: "" })
+            // return <Route exact path="/" render={() => (<Redirect to="/items" />)} />
+        }).catch((err) => {
+            console.log(err)
+        });
+    }
+
+    const UserBtns = ({isUserLogged}) => {
+        console.log(isUserLogged)
+        if (isUserLogged === true) {
+            return (
+                <div className="top__part--login-register">
+                    <div className="hello-user">Cześć, {props.userEmail}</div>
+                    <NavLink to="/oddaj-rzeczy" className="user-btn create-account">Oddaj rzeczy</NavLink>
+                    <NavLink to="/wylogowano" onClick={handleLogOut} className="user-btn">Wyloguj</NavLink>
+                </div>
+            )
+        } else if (isUserLogged === false) {
+            return (
+                <div className="top__part--login-register">
+                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
+                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                </div>
+            )
+
+        }
+    }
 
     return (
         <header className="header__section" id="header-section">
@@ -21,10 +55,7 @@ const HomeHeader = () => {
                 <div className="header__section--right-column">
                     <div className="top__part">
                         <div className="top__part__container">
-                            <div className="top__part--login-register">
-                                <NavLink to="/login" className="user-btn">Zaloguj</NavLink>
-                                <NavLink to="/register" className="user-btn create-account">Załóż konto</NavLink>
-                            </div>
+                            <UserBtns isUserLogged={props.isUserLogged} />
                             <div className="top__part--nav">
                                 <nav>
                                     <ul>
@@ -58,4 +89,10 @@ const HomeHeader = () => {
     )
 }
 
-export default HomeHeader
+const mapStateToProps = state  => ({
+    isUserLogged: state.isUserLogged,
+    adminPermissions: state.adminPermissions,
+    userEmail: state.userEmail
+})
+
+export default connect(mapStateToProps, {}) (HomeHeader)
