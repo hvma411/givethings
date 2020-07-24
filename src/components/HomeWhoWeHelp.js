@@ -16,20 +16,48 @@ import { Events } from "react-scroll";
 
 const HomeWhoWeHelp = () => {
 
+    const [showList, setShowList] = useState({
+        foundations: true,
+        organizations: false,
+        locals: false
+    })
+
+    const handleClickFoundations = (e) => {
+        setShowList({
+            foundations: true,
+            organizations: false,
+            locals: false
+        })
+    }
+
+    const handleClickOrganizations = (e) => {
+        setShowList({
+            foundations: false,
+            organizations: true,
+            locals: false
+        })
+    }
+
+    const handleClickLocals = (e) => {
+        setShowList({
+            foundations: false,
+            organizations: false,
+            locals: true
+        })
+    }
+
     return (
         <section className="who__we__help__section" id="who-we-help-section">
             <div className="who__we__help__section--container">
                     <h2>Komu pomagamy?</h2>
                     <div className="decoration"></div>
                 <ul className="section-organizations">
-                    <li className="item"><NavLink to="/foundations">Fundacjom</NavLink></li>
-                    <li className="item"><NavLink to="/organizations">Organizacjom pozarządowym</NavLink></li>
-                    <li className="item"><NavLink to="/locals">Lokalnym zbiórkom</NavLink></li>
+                    <li className="item"><button onClick={ handleClickFoundations }>Fundacjom</button></li>
+                    <li className="item"><button onClick={ handleClickOrganizations }>Organizacjom pozarządowym</button></li>
+                    <li className="item"><button onClick={ handleClickLocals }>Lokalnym zbiórkom</button></li>
                 </ul>
                 <p className="database-information">W naszej bazie znajdziesz listę zweryfikowanych Fundacji, z którymi współpracujemy. Możesz sprawdzić czym się zajmują, komu pomagają i czego potrzebują.</p>
-                <Route path="/foundations" component={FoundationsList} />
-                <Route path="/organizations" component={OrganizationsList} />
-                <Route path="/locals" component={LocalsList} />
+                <ListRender showList={ showList } />
             </div>
         </section>
     )
@@ -40,7 +68,6 @@ const Pagination = ({ itemsPerPage, totalItems, paginate }) => {
 
     for (let i = 1; i <= Math.ceil(totalItems / itemsPerPage); i++) {
         pageNumbers.push(i);
-        console.log(pageNumbers)
     }
 
     if (pageNumbers.length < 2) {
@@ -71,7 +98,6 @@ const FoundationsList = () => {
     const [foundationsItemsPerPage, setFoundationsItemsPerPage] = useState(3);
 
     const getFoundationsData = async () => {
-        // setLoading(true);
         const events = await fire.firestore().collection('foundations')
         const dataArr = []
         await events.get().then((querySnapshot) => {
@@ -80,16 +106,11 @@ const FoundationsList = () => {
             });
         });
         setFoundationsItems(dataArr);
-        // setLoading(false);
     }
 
     useEffect( () => {
         getFoundationsData();
     }, [])
-
-    // useEffect( () => {
-    //     console.log(posts)
-    // }, [posts])
 
     const indexOfLastFoundationsItem = currentFoundationsPage * foundationsItemsPerPage;
     const indexOfFirstFoundationsItem = indexOfLastFoundationsItem - foundationsItemsPerPage;
@@ -141,10 +162,6 @@ const OrganizationsList = () => {
         getOrganizationsData();
     }, [])
 
-    // useEffect( () => {
-    //     console.log(posts)
-    // }, [posts])
-
     const indexOfLastOrganizationsItem = currentOrganizationsPage * organizationsItemsPerPage;
     const indexOfFirstOrganizationsItem = indexOfLastOrganizationsItem - organizationsItemsPerPage;
     const currentOrganizationsItems = organizationsItems.slice(indexOfFirstOrganizationsItem, indexOfLastOrganizationsItem)
@@ -195,9 +212,6 @@ const LocalsList = () => {
         getLocalsData();
     }, [])
 
-    // useEffect( () => {
-    //     console.log(posts)
-    // }, [posts])
 
     const indexOfLastLocalsItem = currentLocalsPage * localsItemsPerPage;
     const indexOfFirstLocalsItem = indexOfLastLocalsItem - localsItemsPerPage;
@@ -223,6 +237,25 @@ const LocalsList = () => {
             <Pagination itemsPerPage={ localsItemsPerPage } totalItems={ localsItems.length } paginate={ paginate }/>
         </>
     )
+}
+
+const ListRender = ({ showList }) => {
+    console.log(showList)
+
+    if (showList.foundations && !showList.organizations && !showList.locals) {
+        console.log('works')
+        return (
+            <FoundationsList />
+        )
+    } else if (!showList.foundations && showList.organizations && !showList.locals) {
+        return (
+            <OrganizationsList />
+        )
+    } else if (!showList.foundations && !showList.organizations && showList.locals) {
+        return (
+            <LocalsList />
+        )
+    }
 }
 
 export default HomeWhoWeHelp

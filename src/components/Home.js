@@ -16,6 +16,7 @@ import HomeHeader from './HomeHeader';
 import HomeAboutApp from './HomeAboutApp';
 import HomeAboutUs from './HomeAboutUs';
 import HomeWhoWeHelp from './HomeWhoWeHelp';
+import HomeFooter from './HomeFooter';
 
 const Home = () => {
 
@@ -25,6 +26,7 @@ const Home = () => {
             <HomeAboutApp />
             <HomeAboutUs />
             <HomeWhoWeHelp />
+            <HomeFooter />
         </>
     )
 }

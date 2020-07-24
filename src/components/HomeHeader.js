@@ -8,12 +8,31 @@ import {
   NavLink,
 } from 'react-router-dom';
 import { Link } from "react-scroll";
-import Home from "./Home";
-// import { Provider } from 'react-redux'
-// import { connect } from 'react-redux'
-// import store from './ReduxStore';
+import { connect } from 'react-redux'
 
-const HomeHeader = () => {
+
+const HomeHeader = (props) => {
+    console.log(props.isUserLogged)
+
+    const UserBtns = ({isUserLogged}) => {
+        console.log(isUserLogged)
+        if (isUserLogged === true) {
+            return (
+                <div className="top__part--login-register">
+                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
+                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                </div>
+            )
+        } else if (isUserLogged === false) {
+            return (
+                <div className="top__part--login-register">
+                    <NavLink to="/logowanie" className="user-btn">Zaloguj</NavLink>
+                    <NavLink to="/rejestracja" className="user-btn create-account">Załóż konto</NavLink>
+                </div>
+            )
+
+        }
+    }
 
     return (
         <header className="header__section" id="header-section">
@@ -22,18 +41,15 @@ const HomeHeader = () => {
                 <div className="header__section--right-column">
                     <div className="top__part">
                         <div className="top__part__container">
-                            <div className="top__part--login-register">
-                                <NavLink to="/login" className="user-btn">Zaloguj</NavLink>
-                                <NavLink to="/register" className="user-btn create-account">Załóż konto</NavLink>
-                            </div>
+                            <UserBtns isUserLogged={props.isUserLogged} />
                             <div className="top__part--nav">
                                 <nav>
                                     <ul>
-                                        <li><Link to="header-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Start</Link></li>
-                                        <li><Link to="about-app-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O co chodzi?</Link></li>
-                                        <li><Link to="about-us-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O nas</Link></li>
-                                        <li><Link to="who-we-help-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Fundacja i organizacje</Link></li>
-                                        <li><Link to="contact-section" smooth={true} duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Kontakt</Link></li>
+                                        <li><NavLink to="/" smooth="true" duration={1000} activeStyle={{ border: "1px solid #3C3C3C" }}>Start</NavLink></li>
+                                        <li><Link to="about-app-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O co chodzi?</Link></li>
+                                        <li><Link to="about-us-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>O nas</Link></li>
+                                        <li><Link to="who-we-help-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Fundacja i organizacje</Link></li>
+                                        <li><Link to="footer-section" smooth="true" duration={1000} activestyle={{ border: "1px solid #3C3C3C" }}>Kontakt</Link></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -59,4 +75,9 @@ const HomeHeader = () => {
     )
 }
 
-export default HomeHeader
+const mapStateToProps = state  => ({
+    isUserLogged: state.isUserLogged,
+    adminPermissions: state.adminPermissions
+})
+
+export default connect(mapStateToProps, {}) (HomeHeader)
