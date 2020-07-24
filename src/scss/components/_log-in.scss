@@ -1,0 +1,176 @@
+.log-in-section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+
+    &--navigation {
+        width: 50%;
+        height: 30vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-end;
+
+        &--login-register {
+            margin-top: 35px;
+            margin-right: 165px;
+
+            .user-btn {
+                background: none;
+                border: none;
+                font-size: 13px;
+                color: $color-4;
+                padding: 5px 10px 5px 10px;
+                cursor: pointer;
+                outline: none;
+                text-decoration: none;
+            }
+
+            .create-account {
+                border: 1px solid $color-3;
+                margin-left: 10px;
+            }
+        }
+
+        &--menu {
+            margin-top: 35px;
+            margin-right: 150px;
+            ul {
+                display: flex;
+                justify-content: space-between;
+                margin-right: 15px;
+                margin-top: 8px;
+
+                li {
+                    margin-left: 15px;
+                    cursor: pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    
+
+                    a {
+                        display: inline-table;
+                        text-decoration: none;
+                        color: $color-5;
+                        padding: 5px 15px 5px 15px;
+                        font-size: 18px;
+                        text-align: left;
+                    };
+                }
+            }
+        }
+    }
+
+    &--form {
+        width: 100%;
+        height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        color: $color-5;
+
+        .title {
+            font-size: 40px;
+            text-align: center;
+        }
+
+        .decoration {
+            width: 250px;
+            height: 100px;
+            background-image: url(/src/scss/assets/Decoration.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        
+        .log-in-form {
+            background-color: $color-1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 35px 60px 35px 60px;
+
+            &--first-box {
+                display: flex;
+                flex-direction: column;   
+                padding-bottom: 15px; 
+            }
+
+            &--second-box {
+                display: flex;
+                flex-direction: column;
+                margin-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            &--third-box {
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+                padding-bottom: 10px;
+            }
+
+            label {
+                font-size: 14px;
+                font-weight: 400;
+            }
+
+            input {
+                background: none;
+                border: none;
+                outline: none;
+                border-bottom: 1px solid $color-5;
+                font-size: 16px;
+                font-weight: 100;
+                padding: 5px;
+            }
+
+            .validate-info {
+                width: 100%;
+                height: 5px;
+                padding-top: 3px;
+            }
+
+            p {
+                font-size: 12px;
+                font-weight: 100;
+                color: red;
+            }
+        }
+
+        .form-btns {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 450px;
+            margin-top: 50px;
+
+            button, a {
+                font-size: 14px;
+                font-weight: 100;
+                background: none;
+                border: none;
+                padding: 10px 15px 10px 15px;
+                text-decoration: none;
+                color: $color-5;
+                cursor: pointer;
+                outline: none;
+            }
+
+            .button-border {
+                border: 1px solid $color-5
+            }
+        }
+
+        .logged-out {
+            justify-content: center;
+            margin-top: 10px;
+        }
+    }
+}
